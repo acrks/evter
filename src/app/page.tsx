@@ -74,7 +74,7 @@ export default function Home() {
           <p className="eyebrow">PARTY PLANNING, MADE HUMAN</p>
           <h1>A better way to bring everyone <em>together.</em></h1>
           <p className="hero-copy">The bachelor party is supposed to be the fun part. Evter keeps the texts, tabs, spreadsheets, votes, and who-owes-what in one considered place.</p>
-          <div className="hero-actions"><button className="primary-button" onClick={() => setView("party")}>Explore the Vegas weekend <span>→</span></button><button className="quiet-button" onClick={() => setView("auth")}>Create an account</button></div>
+          <div className="hero-actions"><button className="primary-button" onClick={() => setView("auth")}>Sign in to your party <span>→</span></button><button className="quiet-button" onClick={() => { setAuthMode("sign-up"); setView("auth"); }}>Create an account</button></div>
         </section>
         <section className="ritual-card"><div><p className="eyebrow">ONE SHARED RHYTHM</p><h2>Less wrangling.<br />More celebrating.</h2></div><div className="mini-itinerary"><p><b>Thu</b><span>Land, check in, settle in</span></p><p><b>Fri</b><span>Golf at 10 · Dinner at 8</span></p><p><b>Sat</b><span>Pool day · House party</span></p></div></section>
       </> : <section className="auth-card">
