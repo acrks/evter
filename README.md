@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Evter
 
-## Getting Started
+Evter is a calmer, shared place to plan a bachelor or bachelorette party. It replaces the fragmented mix of group texts, spreadsheets, polls, and payment reminders with a single party workspace.
 
-First, run the development server:
+## What works today
+
+- Supabase email/password sign-up and sign-in.
+- Google OAuth entry point, ready to configure later in Supabase.
+- A responsive, seed-rich San Diego → Las Vegas party dashboard for 12 people.
+- Interactive date/destination voting, activity RSVP, supply claiming, and role-aware planning navigation.
+- A production-minded Postgres schema with RLS in `supabase/migrations/`.
+
+The demo route is deliberately self-contained so a reviewer can explore it without any external API dependency. Flight, activity, dining, and payment integrations are intentionally deferred behind the app's data model.
+
+## Local setup
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set the two values from your Supabase project’s **API Keys** settings:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Apply `supabase/migrations/20261008170000_initial_schema.sql` in the Supabase SQL Editor before wiring the seeded experience to live data.
 
-## Learn More
+## Verification
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npx next build --webpack
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The default Turbopack build is not reliable in this sandbox because its CSS worker cannot bind a local port; the Webpack production build passes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Google OAuth later
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Create a Google OAuth client, add its client ID and secret in Supabase Authentication → Providers → Google, and add the deployed URL to Supabase Authentication → URL Configuration.
